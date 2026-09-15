@@ -22,12 +22,20 @@ public class Texting extends JFrame {
         JButton button = new JButton("Print");
         button.setSize(140, 70);
         button.addActionListener(e -> {
-            int x = Integer.parseInt(textField.getText());
-            new GridPane(x).setVisible(true);
+            try {
+                int x = Integer.parseInt(textField.getText());
+                new GridPane(x).setVisible(true);
+            } catch (NumberFormatException ex) {
+                System.out.println("Invalid input!");
+                JOptionPane.showMessageDialog(null,
+                        "Invalid input! Please enter a whole number.",
+                "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         });
 
-        add(button);
         add(textField);
+        add(button);
         pack();
     }
 
