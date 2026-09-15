@@ -5,11 +5,13 @@ import java.awt.*;
 
 public class GridPane extends JFrame {
 
-    public GridPane() {
-        int dimension = 10;
+    final static int DEFAULT_DIM = 10;
+
+    public GridPane(int dim) {
+        int dimension = dim;
         setSize(600, 600);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         setLayout(new GridLayout(dimension, dimension));
 
@@ -24,6 +26,10 @@ public class GridPane extends JFrame {
             }
 
         }
+    }
+
+    public GridPane() {
+        this(DEFAULT_DIM);
     }
 
     public static void main(String[] args) {
