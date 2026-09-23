@@ -3,9 +3,9 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
-public class BankMachine extends JFrame {
+public class BankTest extends JFrame {
 
-    public BankMachine() {
+    public BankTest() {
 //        setSize(400, 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -40,7 +40,7 @@ public class BankMachine extends JFrame {
     }
 
     public static void main(String[] args) {
-        new BankMachine().setVisible(true);
+        new BankTest().setVisible(true);
     }
 }
 class Bankovky extends JFrame {
