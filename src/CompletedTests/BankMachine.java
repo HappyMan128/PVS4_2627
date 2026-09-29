@@ -1,4 +1,4 @@
-package gui;
+package CompletedTests;
 
 import javax.swing.*;
 import java.awt.*;
