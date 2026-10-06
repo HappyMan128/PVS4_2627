@@ -7,29 +7,30 @@ public class Progressing extends JFrame {
 
     JProgressBar bar;
 
-    public Progressing() {
+    Progressing(){
+        setSize(420,420);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setSize(800, 400);
         setLayout(null);
+        setLocationRelativeTo(null);
 
-        bar = new JProgressBar(0, 500);
-        bar.setFont(new Font("Consolas", Font.BOLD, 20));
-        bar.setForeground(Color.MAGENTA);
+        bar = new JProgressBar(0,500);
+        bar.setFont(new Font("Consolas", Font.BOLD, 28));
+        bar.setForeground(Color.magenta);
+        bar.setBackground(new Color(0xFF8941));
 
-        bar.setBounds(0, 0, getWidth(), 60);
-        bar.setValue(50);
         bar.setStringPainted(true);
+        bar.setBounds(0,0, getWidth(), 60);
+        bar.setValue(50);
 
         add(bar);
     }
 
-    public void fill() {
+    public void fill(){
         int counter = 500;
         bar.setValue(500);
-        while (counter > 0) {
+        while (counter > 0){
             try {
-                Thread.sleep(1000);
+                Thread.sleep(86);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -38,9 +39,10 @@ public class Progressing extends JFrame {
         }
     }
 
-    static void main() {
+    public static void main(String[] args) {
         Progressing p = new Progressing();
         p.setVisible(true);
         p.fill();
     }
+
 }

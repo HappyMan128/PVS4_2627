@@ -4,47 +4,47 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GridPane extends JFrame {
-
     final static int DEFAULT_DIM = 10;
 
-    public GridPane(int dim) {
-        int dimension = dim;
-        setSize(600, 600);
+    public GridPane(int dim){
+        int dimension = dim; //(4-100)
+
+        setSize(700, 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        setLayout(new GridLayout(dimension, dimension));
+        setLayout(new GridLayout(dimension,dimension));
 
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                if ((i + j) % 2 == 0) {
-                    add(new Piece(Color.cyan));
-                }
-                else {
-                    add(new Piece(Color.red));
-                }
+            if ((i+j) % 2 == 1)
+                add(new Piece(Color.red));
+            else
+                add(new Piece(Color.cyan));
             }
-
         }
     }
 
-    public GridPane() {
+    public GridPane(){
+
         this(DEFAULT_DIM);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
+
 
     public static void main(String[] args) {
         new GridPane().setVisible(true);
     }
 }
-
-//custom component
 class Piece extends JLabel {
-    public Piece(Color color) {
+
+    //vlastni label, pamatuje si vsechnu konfiguraci
+    public Piece(Color color){
         setText(" ");
-        setFont(new Font("Comic Sans", Font.PLAIN, 18));
+        setFont(new Font("Arial", Font.PLAIN, 18));
         setHorizontalAlignment(CENTER);
         setVerticalAlignment(CENTER);
-        setBorder(BorderFactory.createLineBorder(Color.black, 4));
+        setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         setOpaque(true);
         setBackground(color);
     }
