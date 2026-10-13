@@ -7,19 +7,17 @@ import java.awt.event.MouseListener;
 
 public class MouseDemo extends JFrame {
 
-    public MouseDemo(){
+    public MouseDemo() {
         setLayout(null);
-        setSize(500,500);
+        setSize(500, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-
-        //jeden label, velky obdelnik
         JLabel label = new JLabel("");
         label.setBackground(Color.red);
         label.setOpaque(true);
 
-        label.setBounds(213,176,100,120);
+        label.setBounds(150, 150, 200, 150);
         label.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -47,14 +45,10 @@ public class MouseDemo extends JFrame {
             }
         });
 
-
         add(label);
     }
-
 
     public static void main(String[] args) {
         new MouseDemo().setVisible(true);
     }
-
-
 }
