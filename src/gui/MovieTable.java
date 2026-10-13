@@ -13,23 +13,21 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MovieTable extends JFrame {
-    List<Record> data;
+    ArrayList<Record> data;
     DefaultTableModel model;
 
     MovieTable(){
+
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(420,640);
         setLayout(new BorderLayout());
 
-        String[] columnNames = {"Name", "Year", "Rating", "Duration"};
-        model = new DefaultTableModel(columnNames, 0);
-
-        JTable table = new JTable(model);
         JPanel upperPanel = new JPanel(new FlowLayout());
 
         JRadioButton nameButton = new JRadioButton("Name");
-        JRadioButton yearButton = new JRadioButton("Release");
+        JRadioButton yearButton = new JRadioButton("Released");
         JRadioButton ratingButton = new JRadioButton("Rating");
         JRadioButton durationButton = new JRadioButton("Duration");
 
@@ -39,32 +37,32 @@ public class MovieTable extends JFrame {
         group.add(ratingButton);
         group.add(durationButton);
 
-        nameButton.setSelected(true);
+        nameButton.setFocusable(false);
+        yearButton.setFocusable(false);
+        ratingButton.setFocusable(false);
+        durationButton.setFocusable(false);
+
+        nameButton.setSelected(true); //nejaky jeden defaultni
 
         JButton sortButton = new JButton("Sort");
-        sortButton.addActionListener(a -> {
-            if (nameButton.isSelected()) {
+        sortButton.addActionListener(e -> {
+            if (nameButton.isSelected()){
                 data.sort(Comparator.comparing(Record::getName));
             }
-            if (yearButton.isSelected()) {
-                data.sort(Comparator.comparing(Record::getYearOfRelease));
+            if (yearButton.isSelected()){
+                data.sort(Comparator.comparingInt(Record::getYearOfRelease));
             }
-            if (ratingButton.isSelected()) {
-                data.sort(Comparator.comparing(Record::getRating));
+            if (ratingButton.isSelected()){
+                data.sort(new Comparator<Record>() {
+                    @Override
+                    public int compare(Record o1, Record o2) {
+                        return (int) (o1.rating - o2.rating);
+                    }
+                });
             }
-            if (durationButton.isSelected()) {
-                data.sort(Comparator.comparing(Record::getDuration));
-            }
-
-            model.setRowCount(0);
-            fillTable();
+            System.out.println(data);
         });
-
-        nameButton.setFocusable(false);
-        ratingButton.setFocusable(false);
-        yearButton.setFocusable(false);
-        durationButton.setFocusable(false);
-        sortButton.setFocusable(false);
+//        sortButton.setFocusable(false);
 
         upperPanel.add(nameButton);
         upperPanel.add(yearButton);
@@ -72,31 +70,31 @@ public class MovieTable extends JFrame {
         upperPanel.add(durationButton);
         upperPanel.add(sortButton);
 
+        String[] columnNames = {"Name", "Year", "Rating", "Duration"};
+        model = new DefaultTableModel(columnNames, 0);
+
+        JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
-
-
-
         loadData("data/Movies.txt");
         fillTable();
+
 
         add(upperPanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
         pack();
-
-
     }
 
 
     void loadData(String filePath){
         try {
-            data = Files.lines(Path.of(filePath))
+            data = new ArrayList<>(Files.lines(Path.of(filePath))
                     .map(line -> line.split(";"))
                     .map(parts -> new Record(
                             parts[0],
                             Integer.parseInt(parts[1]),
                             Double.parseDouble(parts[2]),
                             Integer.parseInt(parts[3])
-                    )).toList();
+                    )).toList() );
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -104,8 +102,8 @@ public class MovieTable extends JFrame {
     }
 
     void fillTable(){
-        for (Record record : data) {
-            model.addRow(record.toTableRow());
+        for (Record record : data){
+            model.addRow(record.getAsTableRow());
         }
     }
 
@@ -129,9 +127,6 @@ class Record {
         this.duration = duration;
     }
 
-    public String[] toTableRow() {
-        return new String[]{name, String.valueOf(yearOfRelease), String.valueOf(rating), String.valueOf(duration)};
-    }
 
     public String getName() {
         return name;
@@ -147,5 +142,9 @@ class Record {
 
     public int getDuration() {
         return duration;
+    }
+
+    public String[] getAsTableRow(){
+        return new String[]{name, String.valueOf(yearOfRelease), String.valueOf(rating), String.valueOf(duration)};
     }
 }
