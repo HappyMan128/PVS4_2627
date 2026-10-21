@@ -19,10 +19,30 @@ public class Rent {
         return new String[]{
                 customerName,
                 String.valueOf(roomNumber),
-                studentDiscount ? "Yes" : "No",
                 skiType.toString(),
+                studentDiscount ? "Yes" : "No",
                 String.valueOf(rentalDays)
         };
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public boolean isStudentDiscount() {
+        return studentDiscount;
+    }
+
+    public SkiType getSkiType() {
+        return skiType;
+    }
+
+    public int getRentalDays() {
+        return rentalDays;
     }
 }
 
