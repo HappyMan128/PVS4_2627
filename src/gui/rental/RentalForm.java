@@ -177,13 +177,20 @@ public class RentalForm extends JFrame {
         //ano -> uz mam rezervaci a jen menim
         //ne -> vytvarim novou rezervaci
         if (editMode){
-            reservation = new Rent(
-                    nameField.getText(),
-                    Integer.parseInt(roomField.getText()),
-                    studentDiscountCheckBox.isSelected(),
-                    getEquipmentType(),
-                    daysSlider.getValue()
-            );
+            reservation.setCustomerName(nameField.getText());
+            reservation.setRoomNumber(Integer.parseInt(roomField.getText()));
+            reservation.setStudentDiscount(studentDiscountCheckBox.isSelected());
+            reservation.setSkiType(getEquipmentType());
+            reservation.setRentalDays(daysSlider.getValue());
+            //nebude fungovat:
+//            reservation = new Rent(
+//                    nameField.getText(),
+//                    Integer.parseInt(roomField.getText()),
+//                    studentDiscountCheckBox.isSelected(),
+//                    getEquipmentType(),
+//                    daysSlider.getValue()
+//            );
+            //nefunguje, jelikoz promenna by neukazovala do listu
         } else {
             Rent rent = new Rent(
                     nameField.getText(),

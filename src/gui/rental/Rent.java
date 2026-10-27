@@ -44,6 +44,26 @@ public class Rent {
     public int getRentalDays() {
         return rentalDays;
     }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public void setStudentDiscount(boolean studentDiscount) {
+        this.studentDiscount = studentDiscount;
+    }
+
+    public void setSkiType(SkiType skiType) {
+        this.skiType = skiType;
+    }
+
+    public void setRentalDays(int rentalDays) {
+        this.rentalDays = rentalDays;
+    }
 }
 
 enum SkiType {
